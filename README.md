@@ -1,1 +1,1 @@
-# -e.g.-mrdu-campus-ai-
+# -MRDU-CAMPUS-AI-
