@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRDU Campus AI | Next-Gen Smart Campus Ecosystem</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            DEFAULT: '#00e5ff',
+                            dark: '#00b8cc'
+                        },
+                        darkbg: '#07111f',
+                        darkcard: 'rgba(16, 28, 45, 0.75)',
+                        lightcard: 'rgba(255, 255, 255, 0.85)'
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-short': 'bounce 1s infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Glassmorphism Styling */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .light .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(7, 17, 31, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .light .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 229, 255, 0.3);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 229, 255, 0.6);
+        }
+
+        /* Glow effects */
+        .cyan-glow {
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.25);
+        }
+        .red-glow {
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Typing indicator animation */
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-slate-100 transition-colors duration-300 dark:bg-darkbg dark:text-slate-100 light:bg-slate-50 light:text-slate-900 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-black">
+
+    <!-- Navigation Header -->
+    <nav class="glass-nav fixed top-0 w-full z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-cyan-500/30">
+                        <i class="fa-solid fa-robot text-slate-900"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-black tracking-wider text-white light:text-slate-900">MRDU <span class="text-brand">AI</span></span>
+                        <span class="block text-[10px] tracking-widest text-cyan-400 font-semibold uppercase -mt-1">Campus Ecosystem</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#home" class="hover:text-brand transition-colors py-1 border-b-2 border-transparent hover:border-brand">Home</a>
+                    <a href="#search-section" class="hover:text-brand transition-colors py-1 border-b-2 border-transparent hover:border-brand">Smart Search</a>
+                    <a href="#campus-explorer" class="hover:text-brand transition-colors py-1 border-b-2 border-transparent hover:border-brand">Campus Directory</a>
+                    <a href="#events-hub" class="hover:text-brand transition-colors py-1 border-b-2 border-transparent hover:border-brand">Events Hub</a>
+                    <a href="#study-hub" class="hover:text-brand transition-colors py-1 border-b-2 border-transparent hover:border-brand">Study AI</a>
+                    <a href="#emergency" class="text-red-400 hover:text-red-300 transition-colors font-semibold flex items-center space-x-1">
+                        <i class="fa-solid fa-triangle-exclamation animate-pulse"></i>
+                        <span>SOS Portal</span>
+                    </a>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="flex items-center space-x-3">
+                    <!-- Dark/Light Theme Switcher -->
+                    <button onclick="App.toggleTheme()" class="p-2.5 rounded-full bg-slate-800/80 light:bg-slate-200 text-cyan-400 light:text-slate-700 hover:scale-105 transition-all border border-slate-700 light:border-slate-300" title="Toggle Dark/Light Mode" id="themeToggleBtn">
+                        <i class="fa-solid fa-moon text-lg"></i>
+                    </button>
+
+                    <!-- Ask AI Quick Trigger -->
+                    <button onclick="App.toggleChatbot(true)" class="hidden sm:flex items-center space-x-2 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 text-slate-950 font-bold px-4 py-2.5 rounded-full text-sm transition-all transform hover:-translate-y-0.5 shadow-lg shadow-cyan-500/20">
+                        <i class="fa-solid fa-sparkles"></i>
+                        <span>Launch Assistant</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="App.toggleMobileMenu()" class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl" id="mobileMenuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden glass-panel border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" onclick="App.toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-brand">Home</a>
+            <a href="#search-section" onclick="App.toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-brand">Smart Search</a>
+            <a href="#campus-explorer" onclick="App.toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-brand">Campus Directory</a>
+            <a href="#events-hub" onclick="App.toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-brand">Events Hub</a>
+            <a href="#study-hub" onclick="App.toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-brand">Study Assistant</a>
+            <a href="#emergency" onclick="App.toggleMobileMenu()" class="block py-2 text-red-400 font-bold">🚨 Emergency SOS Desk</a>
+            <button onclick="App.toggleChatbot(true); App.toggleMobileMenu();" class="w-full mt-2 bg-brand text-slate-950 font-bold py-2.5 rounded-xl text-center">
+                🤖 Launch AI Chatbot
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <!-- Background Decorative Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[90px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <!-- AI Tag Badge -->
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-semibold mb-6 shadow-inner">
+                <span class="flex h-2 w-2 rounded-full bg-cyan-400 animate-ping"></span>
+                <i class="fa-solid fa-microchip text-brand"></i>
+                <span>Next-Gen Smart Campus Neural OS</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight text-white light:text-slate-900 mb-6">
+                Welcome to <br class="hidden sm:inline"/>
+                <span class="bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 bg-clip-text text-transparent">MRDU Campus Intelligence</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="max-w-2xl mx-auto text-base sm:text-xl text-slate-300 light:text-slate-600 font-normal leading-relaxed mb-10">
+                Your unified AI assistant for instant real-time campus navigation, automated study resources, event updates, and emergency dispatch services.
+            </p>
+
+            <!-- CTA Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+                <button onclick="App.toggleChatbot(true)" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-bold text-base shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 transition-all flex items-center justify-center space-x-3">
+                    <i class="fa-solid fa-comments text-lg"></i>
+                    <span>Ask Campus AI</span>
+                </button>
+
+                <a href="#campus-explorer" class="w-full sm:w-auto px-8 py-4 rounded-full glass-panel hover:bg-slate-800/80 light:hover:bg-slate-200 text-white light:text-slate-800 font-semibold text-base transition-all border border-slate-700/60 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-compass text-cyan-400"></i>
+                    <span>Explore Map</span>
+                </a>
+            </div>
+
+            <!-- Quick Stats Metrics -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="glass-panel p-4 rounded-2xl border border-slate-800">
+                    <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400">100%</div>
+                    <div class="text-xs text-slate-400 mt-1">Real-Time AI Response</div>
+                </div>
+                <div class="glass-panel p-4 rounded-2xl border border-slate-800">
+                    <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400">8+</div>
+                    <div class="text-xs text-slate-400 mt-1">Key Campus Zones</div>
+                </div>
+                <div class="glass-panel p-4 rounded-2xl border border-slate-800">
+                    <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400">24/7</div>
+                    <div class="text-xs text-slate-400 mt-1">Emergency SOS Support</div>
+                </div>
+                <div class="glass-panel p-4 rounded-2xl border border-slate-800">
+                    <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400">&lt; 1s</div>
+                    <div class="text-xs text-slate-400 mt-1">Simulated API Latency</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Smart Campus Search Section -->
+    <section id="search-section" class="py-16 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="glass-panel p-8 rounded-3xl border border-cyan-500/20 shadow-2xl relative overflow-hidden">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white light:text-slate-900 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-magnifying-glass text-cyan-400"></i>
+                        <span>Smart Campus Neural Search</span>
+                    </h2>
+                    <p class="text-slate-400 light:text-slate-600 text-sm mt-1">Query anything about fees, timings, Wi-Fi, faculty, lost & found, or locations.</p>
+                </div>
+
+                <!-- Input Box -->
+                <div class="relative flex items-center">
+                    <input type="text" id="mainSearchInput" placeholder="e.g., 'Where is the library?' or 'What is the WiFi password?'" class="w-full bg-slate-900/90 light:bg-slate-100 border border-slate-700 light:border-slate-300 rounded-2xl py-4 pl-5 pr-32 text-white light:text-slate-900 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all text-sm sm:text-base placeholder-slate-500">
+                    <button onclick="App.handleMainSearch()" class="absolute right-2 bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 font-bold px-5 py-2.5 rounded-xl hover:opacity-90 transition-all text-sm flex items-center space-x-2">
+                        <span>Search</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Quick Query Pills -->
+                <div class="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs">
+                    <span class="text-slate-400">Popular:</span>
+                    <button onclick="App.setSearchQuery('Where is the Library?')" class="px-3 py-1 rounded-full bg-slate-800/80 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-700 transition-all">📖 Library Hours</button>
+                    <button onclick="App.setSearchQuery('What is the campus WiFi password?')" class="px-3 py-1 rounded-full bg-slate-800/80 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-700 transition-all">📶 Wi-Fi Access</button>
+                    <button onclick="App.setSearchQuery('Where is the Canteen?')" class="px-3 py-1 rounded-full bg-slate-800/80 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-700 transition-all">🍔 Canteen Menu</button>
+                    <button onclick="App.setSearchQuery('How to contact Health Center?')" class="px-3 py-1 rounded-full bg-slate-800/80 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-700 transition-all">🏥 Medical Help</button>
+                </div>
+
+                <!-- Search Results Output -->
+                <div id="searchResultDisplay" class="hidden mt-6 p-5 rounded-2xl bg-slate-900/80 border border-cyan-500/30 text-sm leading-relaxed text-cyan-200">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Campus Directory Explorer -->
+    <section id="campus-explorer" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white light:text-slate-900">
+                🏫 Campus Directory & Map
+            </h2>
+            <p class="text-slate-400 light:text-slate-600 mt-2 text-base">Select any campus sector to inspect operational details, floor plans, and navigation routes.</p>
+            
+            <!-- Category Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6" id="locationFilterContainer">
+                <button onclick="App.filterLocations('all')" class="location-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-cyan-500 text-slate-950 shadow-md">All Locations</button>
+                <button onclick="App.filterLocations('academic')" class="location-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Academic & Labs</button>
+                <button onclick="App.filterLocations('services')" class="location-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Services & Food</button>
+                <button onclick="App.filterLocations('recreation')" class="location-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Sports & Community</button>
+            </div>
+        </div>
+
+        <!-- Campus Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="campusDirectoryGrid">
+            <!-- Dynamic Injection through App.renderLocations() -->
+        </div>
+    </section>
+
+    <!-- Events & Announcements Hub -->
+    <section id="events-hub" class="py-16 bg-slate-950/40 border-y border-slate-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                <div>
+                    <span class="text-cyan-400 font-semibold text-xs tracking-wider uppercase">Live Activity</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white light:text-slate-900 mt-1">📅 Campus Events & Workshops</h2>
+                    <p class="text-slate-400 light:text-slate-600 text-sm mt-1">Discover tech hackathons, sports tournaments, and academic symposiums.</p>
+                </div>
+
+                <!-- Event Filters -->
+                <div class="flex flex-wrap gap-2 mt-4 md:mt-0">
+                    <button onclick="App.filterEvents('all')" class="event-filter-btn text-xs px-3 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold">All</button>
+                    <button onclick="App.filterEvents('Tech')" class="event-filter-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Tech</button>
+                    <button onclick="App.filterEvents('Cultural')" class="event-filter-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Cultural</button>
+                    <button onclick="App.filterEvents('Sports')" class="event-filter-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Sports</button>
+                    <button onclick="App.filterEvents('Academic')" class="event-filter-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Academic</button>
+                </div>
+            </div>
+
+            <!-- Events List Container -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="eventsGrid">
+                <!-- Dynamically Populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Study AI Assistant & Resource Hub -->
+    <section id="study-hub" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-brand font-semibold text-xs uppercase tracking-widest">Academic Suite</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white light:text-slate-900 mt-1">🧠 AI Study Assistant & Lab Booking</h2>
+            <p class="text-slate-400 light:text-slate-600 text-sm max-w-2xl mx-auto mt-2">Generate instant summary notes, view program syllabi, or reserve quiet study pods in real-time.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- AI Notes Summarizer & Explainer -->
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white light:text-slate-900">AI Instant Concept Summarizer</h3>
+                            <p class="text-xs text-slate-400">Paste complex lecture topics to get simplified key points.</p>
+                        </div>
+                    </div>
+
+                    <textarea id="studyNoteInput" rows="4" placeholder="Paste complex lecture notes or topics here (e.g., 'Explain Quantum Computing fundamentals')..." class="w-full bg-slate-900/90 light:bg-slate-100 border border-slate-700 light:border-slate-300 rounded-2xl p-4 text-sm text-white light:text-slate-900 focus:outline-none focus:border-cyan-400 transition-all"></textarea>
+                    
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="text-xs text-slate-500">Powered by MRDU Neural Model</span>
+                        <button onclick="App.summarizeStudyText()" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-5 py-2 rounded-xl text-xs transition-all flex items-center space-x-2">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>Summarize Concept</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Summarizer Output Area -->
+                <div id="studySummarizerResult" class="hidden mt-6 p-4 rounded-2xl bg-slate-900/80 border border-cyan-500/30 text-xs sm:text-sm text-slate-300 space-y-2">
+                </div>
+            </div>
+
+            <!-- Study Room Pod Booking Simulator -->
+            <div class="glass-panel p-6 rounded-3xl border border-slate-800">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-door-open text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white light:text-slate-900">Quiet Study Pod Reservation</h3>
+                        <p class="text-xs text-slate-400">Book library research cubicles and discussion rooms.</p>
+                    </div>
+                </div>
+
+                <form onsubmit="App.handleRoomBooking(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">Select Study Space</label>
+                        <select id="bookingRoomSelect" class="w-full bg-slate-900 light:bg-slate-100 border border-slate-700 light:border-slate-300 rounded-xl p-3 text-xs sm:text-sm text-white light:text-slate-900 focus:outline-none focus:border-cyan-400">
+                            <option value="Pod A1 (Silent - Floor 2)">Pod A1 (Silent Study - Floor 2)</option>
+                            <option value="Pod B3 (Group Discussion - Floor 3)">Pod B3 (Group Discussion - Floor 3)</option>
+                            <option value="Lab Workstation 09 (Tech Block)">Lab Workstation 09 (Tech Block)</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Date</label>
+                            <input type="date" id="bookingDate" required class="w-full bg-slate-900 light:bg-slate-100 border border-slate-700 light:border-slate-300 rounded-xl p-3 text-xs sm:text-sm text-white light:text-slate-900 focus:outline-none focus:border-cyan-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Time Slot</label>
+                            <select id="bookingTime" class="w-full bg-slate-900 light:bg-slate-100 border border-slate-700 light:border-slate-300 rounded-xl p-3 text-xs sm:text-sm text-white light:text-slate-900 focus:outline-none focus:border-cyan-400">
+                                <option>10:00 AM - 12:00 PM</option>
+                                <option>01:00 PM - 03:00 PM</option>
+                                <option>04:00 PM - 06:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold py-3 rounded-xl text-xs sm:text-sm hover:opacity-90 transition-all shadow-lg shadow-purple-500/20">
+                        Confirm Pod Reservation
+                    </button>
+                </form>
+
+                <!-- Saved Reservations List -->
+                <div class="mt-6 pt-4 border-t border-slate-800">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">My Active Reservations</h4>
+                    <div id="activeBookingsList" class="space-y-2 max-h-32 overflow-y-auto custom-scrollbar text-xs">
+                        <!-- Dynamic list -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Help & SOS Dispatch Portal -->
+    <section id="emergency" class="py-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-red-950/80 via-slate-900 to-red-900/40 border border-red-500/40 rounded-3xl p-8 sm:p-12 red-glow text-center relative overflow-hidden">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-red-500/20 text-red-400 border border-red-500/40 text-xs font-bold uppercase mb-4">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                    <span>24/7 Priority Emergency Portal</span>
+                </div>
+
+                <h2 class="text-3xl sm:text-5xl font-black text-white mb-4">🚨 Campus SOS Emergency Dispatch</h2>
+                <p class="text-red-200 text-sm sm:text-base max-w-2xl mx-auto mb-8">
+                    Need urgent medical aid, security intervention, or immediate assistance? Trigger direct distress signals or dial verified helpline channels.
+                </p>
+
+                <!-- Urgent Quick Call Badges -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-8">
+                    <a href="tel:100" class="glass-panel p-4 rounded-2xl border border-red-500/30 hover:border-red-500 text-left flex items-center space-x-4 transition-all hover:scale-105">
+                        <div class="w-12 h-12 rounded-xl bg-red-600/30 text-red-400 flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-white text-sm">Campus Security</div>
+                            <div class="text-xs text-red-300">Control Room: Ext 100</div>
+                        </div>
+                    </a>
+
+                    <a href="tel:108" class="glass-panel p-4 rounded-2xl border border-red-500/30 hover:border-red-500 text-left flex items-center space-x-4 transition-all hover:scale-105">
+                        <div class="w-12 h-12 rounded-xl bg-red-600/30 text-red-400 flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-truck-medical"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-white text-sm">Medical Ambulance</div>
+                            <div class="text-xs text-red-300">Health Desk: 108</div>
+                        </div>
+                    </a>
+
+                    <a href="tel:112" class="glass-panel p-4 rounded-2xl border border-red-500/30 hover:border-red-500 text-left flex items-center space-x-4 transition-all hover:scale-105">
+                        <div class="w-12 h-12 rounded-xl bg-red-600/30 text-red-400 flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-person-shelter"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-white text-sm">Women's Safety</div>
+                            <div class="text-xs text-red-300">24/7 Helpline: 112</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- One-Click SOS Dispatch Simulator Button -->
+                <button onclick="App.triggerSOS()" class="bg-red-600 hover:bg-red-500 text-white font-black px-10 py-5 rounded-full text-lg sm:text-xl shadow-2xl hover:shadow-red-500/50 hover:scale-105 transition-all flex items-center justify-center space-x-3 mx-auto">
+                    <i class="fa-solid fa-satellite-dish animate-spin"></i>
+                    <span>DISPATCH DISTRESS SIGNAL</span>
+                </button>
+
+                <!-- Dispatch Output Log -->
+                <div id="sosStatusOutput" class="hidden mt-6 p-4 rounded-2xl bg-black/80 border border-red-500 text-xs sm:text-sm text-red-300 max-w-2xl mx-auto text-left">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto bg-slate-950 border-t border-slate-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500 text-xs sm:text-sm">
+            <div class="flex items-center justify-center space-x-2 mb-3">
+                <div class="w-6 h-6 rounded-lg bg-cyan-500 text-slate-950 flex items-center justify-center font-black text-xs">M</div>
+                <span class="font-bold text-slate-300">MRDU Campus AI Operating System</span>
+            </div>
+            <p>© 2026 MRDU AI Student Innovation Project. All simulated systems active.</p>
+        </div>
+    </footer>
+
+    <!-- Floating AI Chatbot Widget Window -->
+    <div id="chatbotModal" class="fixed right-4 bottom-4 sm:right-6 sm:bottom-6 w-[calc(100%-2rem)] sm:w-[400px] h-[550px] glass-panel bg-slate-950/95 light:bg-white rounded-3xl border border-cyan-500/30 shadow-2xl z-50 flex flex-col hidden overflow-hidden transition-all duration-300">
+        <!-- Chat Header -->
+        <div class="bg-gradient-to-r from-cyan-500 to-blue-600 p-4 text-slate-950 flex items-center justify-between font-bold">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-robot text-lg"></i>
+                <div>
+                    <div class="leading-none font-extrabold">MRDU Campus Neural AI</div>
+                    <div class="text-[10px] opacity-80 font-semibold uppercase tracking-wider">Online & Ready</div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="App.clearChat()" class="text-xs bg-slate-950/20 hover:bg-slate-950/40 px-2 py-1 rounded text-slate-950 font-semibold" title="Clear Chat History">Clear</button>
+                <button onclick="App.toggleChatbot(false)" class="text-slate-950 hover:opacity-75 text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Body Messages -->
+        <div id="chatBody" class="flex-1 p-4 overflow-y-auto space-y-3 custom-scrollbar text-xs sm:text-sm">
+            <!-- Initial Welcome Message -->
+            <div class="flex items-start space-x-2">
+                <div class="w-7 h-7 rounded-full bg-cyan-500 text-slate-950 flex items-center justify-center font-bold text-xs shrink-0">AI</div>
+                <div class="bg-slate-900 light:bg-slate-100 text-slate-200 light:text-slate-800 p-3 rounded-2xl rounded-tl-none border border-slate-800 light:border-slate-300 max-w-[85%]">
+                    Hello! 👋 I am MRDU Campus AI. Ask me anything about class schedules, faculty offices, library hours, or canteen menus!
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Prompt Recommendations -->
+        <div class="px-3 py-2 bg-slate-900/60 light:bg-slate-100/60 border-t border-slate-800/60 flex items-center gap-1.5 overflow-x-auto custom-scrollbar text-[11px] whitespace-nowrap">
+            <button onclick="App.sendQuickPrompt('Where is the library?')" class="bg-slate-800 light:bg-slate-200 text-slate-300 light:text-slate-700 px-2.5 py-1 rounded-full hover:bg-cyan-500/20 hover:text-cyan-300 transition-all">📖 Library</button>
+            <button onclick="App.sendQuickPrompt('What is today\'s canteen menu?')" class="bg-slate-800 light:bg-slate-200 text-slate-300 light:text-slate-700 px-2.5 py-1 rounded-full hover:bg-cyan-500/20 hover:text-cyan-300 transition-all">🍔 Canteen</button>
+            <button onclick="App.sendQuickPrompt('Where are the computer labs?')" class="bg-slate-800 light:bg-slate-200 text-slate-300 light:text-slate-700 px-2.5 py-1 rounded-full hover:bg-cyan-500/20 hover:text-cyan-300 transition-all">💻 Labs</button>
+            <button onclick="App.sendQuickPrompt('How do I contact security?')" class="bg-slate-800 light:bg-slate-200 text-slate-300 light:text-slate-700 px-2.5 py-1 rounded-full hover:bg-cyan-500/20 hover:text-cyan-300 transition-all">🚨 Security</button>
+        </div>
+
+        <!-- Chat Input Form -->
+        <form onsubmit="App.handleChatSubmit(event)" class="p-3 bg-slate-950 light:bg-slate-50 border-t border-slate-800 light:border-slate-200 flex items-center space-x-2">
+            <input type="text" id="chatInput" placeholder="Ask AI a question..." class="flex-1 bg-slate-900 light:bg-slate-200 border border-slate-700 light:border-slate-300 rounded-xl px-3 py-2 text-xs sm:text-sm text-white light:text-slate-900 focus:outline-none focus:border-cyan-400">
+            <button type="submit" class="w-9 h-9 bg-cyan-500 text-slate-950 rounded-xl flex items-center justify-center font-bold hover:bg-cyan-400 transition-all shrink-0">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+            </button>
+        </form>
+    </div>
+
+    <!-- Floating Trigger Launcher Button -->
+    <button id="chatbotTriggerBtn" onclick="App.toggleChatbot(true)" class="fixed right-6 bottom-6 w-14 h-14 bg-gradient-to-tr from-cyan-400 to-blue-500 text-slate-950 rounded-full flex items-center justify-center text-2xl shadow-2xl cyan-glow z-40 hover:scale-110 transition-all">
+        <i class="fa-solid fa-robot"></i>
+    </button>
+
+    <!-- Location Detailed View Modal -->
+    <div id="locationModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel bg-slate-900 border border-slate-700 max-w-lg w-full rounded-3xl p-6 relative overflow-hidden">
+            <button onclick="App.closeLocationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="locationModalContent">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * MRDU CAMPUS AI - SIMULATED BACKEND & CLIENT OS ARCHITECTURE
+         */
+
+        // 1. In-Memory Database Database Store
+        const DB = {
+            locations: [
+                {
+                    id: 'main-block',
+                    name: 'Main Block A',
+                    category: 'academic',
+                    icon: 'fa-building-columns',
+                    shortDesc: 'Central Administration, Dean Office & Lecture Halls',
+                    floor: 'Floors 1-4',
+                    hours: '08:00 AM - 06:00 PM',
+                    contact: 'Admin Office: +91 98765 43210',
+                    directions: 'Located at the main campus entrance gate opposite the fountain plaza.'
+                },
+                {
+                    id: 'library',
+                    name: 'Central Library',
+                    category: 'academic',
+                    icon: 'fa-book-open-reader',
+                    shortDesc: 'Digital Archives, Research Cubicles & Quiet Pods',
+                    floor: 'Block B, 3 Floors',
+                    hours: '08:00 AM - 10:00 PM',
+                    contact: 'Chief Librarian: Ext 204',
+                    directions: 'Adjacent to Main Block A. Follow the covered walkway East.'
+                },
+                {
+                    id: 'computer-labs',
+                    name: 'High-Perf Computer Labs',
+                    category: 'academic',
+                    icon: 'fa-laptop-code',
+                    shortDesc: 'AI Research, Cloud Workstations & Coding Suites',
+                    floor: 'Tech Block C, Floor 2',
+                    hours: '08:30 AM - 08:00 PM',
+                    contact: 'Lab Supervisor: Ext 305',
+                    directions: 'Take elevator in Tech Block C to 2nd Floor, Wing R.'
+                },
+                {
+                    id: 'canteen',
+                    name: 'College Canteen',
+                    category: 'services',
+                    icon: 'fa-utensils',
+                    shortDesc: 'Multi-cuisine cafeteria, juice bar & social hub',
+                    floor: 'Ground Floor, Student Plaza',
+                    hours: '07:30 AM - 09:00 PM',
+                    contact: 'Canteen Desk: Ext 109',
+                    directions: 'Situated behind the Sports Complex.'
+                },
+                {
+                    id: 'auditorium',
+                    name: 'Grand Auditorium',
+                    category: 'recreation',
+                    icon: 'fa-masks-theater',
+                    shortDesc: '1200-seater venue for events, seminars & cultural fests',
+                    floor: 'Block E',
+                    hours: 'Events Dependent',
+                    contact: 'Event Manager: Ext 402',
+                    directions: 'West Wing next to Open Air Theatre.'
+                },
+                {
+                    id: 'sports-ground',
+                    name: 'Sports Complex',
+                    category: 'recreation',
+                    icon: 'fa-football',
+                    shortDesc: 'Football turf, basketball courts & indoor gymnasium',
+                    floor: 'Outdoor Sector 4',
+                    hours: '06:00 AM - 08:30 PM',
+                    contact: 'Physical Ed Director: Ext 501',
+                    directions: 'North Campus boundary behind Canteen.'
+                },
+                {
+                    id: 'health-center',
+                    name: 'Campus Health Desk',
+                    category: 'services',
+                    icon: 'fa-kit-medical',
+                    shortDesc: 'First-aid, emergency doctor on call, pharmacy',
+                    floor: 'Ground Floor, Hostel Block 1',
+                    hours: '24/7 Service',
+                    contact: 'Medical Helpline: 108',
+                    directions: 'Hostel Sector, Ground Floor Entrance.'
+                },
+                {
+                    id: 'student-hostels',
+                    name: 'Student Residential Hostels',
+                    category: 'services',
+                    icon: 'fa-hotel',
+                    shortDesc: 'Secure boys & girls residential accommodation',
+                    floor: 'Hostel Blocks 1-4',
+                    hours: 'Curfew: 09:30 PM',
+                    contact: 'Hostel Warden: Ext 601',
+                    directions: 'South Campus Quadrangle.'
+                }
+            ],
+            events: [
+                {
+                    id: 'evt-1',
+                    title: 'MRDU Hackathon 2026',
+                    category: 'Tech',
+                    date: 'Sept 28, 2026',
+                    location: 'High-Perf Computer Lab',
+                    desc: '24-hour AI & Web software development challenge with cash prizes.',
+                    rsvpd: false
+                },
+                {
+                    id: 'evt-2',
+                    title: 'Annual Cultural Fest: Symphony',
+                    category: 'Cultural',
+                    date: 'Oct 05, 2026',
+                    location: 'Grand Auditorium',
+                    desc: 'Music, dance performances, and art showcases across campus departments.',
+                    rsvpd: false
+                },
+                {
+                    id: 'evt-3',
+                    title: 'Inter-Department Football Tournament',
+                    category: 'Sports',
+                    date: 'Oct 12, 2026',
+                    location: 'Sports Complex',
+                    desc: 'Cheer for your department team in the annual championship finals.',
+                    rsvpd: false
+                }
+            ],
+            knowledgeBase: [
+                {
+                    keywords: ['library', 'book', 'reading', 'timing'],
+                    answer: "📖 **Central Library:** Located in Block B. Open 8:00 AM to 10:00 PM. Digital archives, research cubicles, and quiet pods available."
+                },
+                {
+                    keywords: ['wifi', 'internet', 'password', 'network'],
+                    answer: "📶 **Campus Wi-Fi Access:** Connect to network **`MRDU-STUDENT-5G`**. Login credentials are your Student Roll Number and Portal Password."
+                },
+                {
+                    keywords: ['lab', 'computer', 'programming', 'code'],
+                    answer: "💻 **Computer Labs:** High-Performance Computing suites are on 2nd Floor, Tech Block C. Equipped with RTX GPUs and Cloud Workstations."
+                },
+                {
+                    keywords: ['food', 'canteen', 'lunch', 'eat', 'menu'],
+                    answer: "🍔 **College Canteen:** Serves fresh meals, snacks, and juices. Open 7:30 AM - 9:00 PM behind the Sports Complex."
+                },
+                {
+                    keywords: ['fee', 'payment', 'bursar', 'finance'],
+                    answer: "💳 **Tuition Fee Counter:** Located on Ground Floor, Main Block A (Counters 3 & 4). Online payments are accepted on student portal."
+                },
+                {
+                    keywords: ['lost', 'found', 'missing'],
+                    answer: "🔍 **Lost & Found Desk:** Managed at Main Block Security Desk (Ext 100). Check daily between 4:00 PM - 5:00 PM."
+                },
+                {
+                    keywords: ['health', 'doctor', 'medical', 'sick'],
+                    answer: "🏥 **Health Desk:** 24/7 First-Aid station at Hostel Block 1. Doctor on call: Dial 108 or visit campus health center."
+                }
+            ]
+        };
+
+        // 2. Simulated Server API Layer
+        const SimulatedServerAPI = {
+            async search(query) {
+                await new Promise(r => setTimeout(r, 200)); // Simulate micro latency
+                const q = query.toLowerCase();
+                const matched = DB.knowledgeBase.find(kb => kb.keywords.some(k => q.includes(k)));
+                
+                if (matched) {
+                    return { success: true, response: matched.answer };
+                }
+                return { 
+                    success: false, 
+                    response: "🤖 **AI Search:** No exact match found for your query. Try asking about *Library, Wi-Fi passwords, Computer Labs, Canteen menu, or Medical Aid*." 
+                };
+            },
+
+            async chat(prompt) {
+                await new Promise(r => setTimeout(r, 450));
+                const q = prompt.toLowerCase();
+                const matched = DB.knowledgeBase.find(kb => kb.keywords.some(k => q.includes(k)));
+
+                if (matched) {
+                    return { reply: matched.answer };
+                }
+                return { 
+                    reply: `🤖 I'm analyzing your query regarding "${prompt}". Could you clarify if this is related to **Academic Timetables**, **Campus Directions**, or **Administrative Services**?` 
+                };
+            },
+
+            async summarize(text) {
+                await new Promise(r => setTimeout(r, 600));
+                if (!text.trim()) return { summary: "Please provide valid text to summarize." };
+                return {
+                    summary: `💡 **AI Summary & Key Takeaways:**\n\n1. Core Concept identified from inputs.\n2. Key study bullet points extracted for quick review.\n3. Recommended next step: Check Central Library digital portal for extended papers.`
+                };
+            },
+
+            async bookPod(data) {
+                await new Promise(r => setTimeout(r, 300));
+                const reservations = JSON.parse(localStorage.getItem('mrdu_bookings') || '[]');
+                reservations.push(data);
+                localStorage.setItem('mrdu_bookings', JSON.stringify(reservations));
+                return { success: true, bookings: reservations };
+            }
+        };
+
+        // 3. Frontend App Controller
+        const App = {
+            init() {
+                this.loadTheme();
+                this.renderLocations('all');
+                this.renderEvents('all');
+                this.loadBookings();
+            },
+
+            // Theme Switcher
+            toggleTheme() {
+                const isDark = document.documentElement.classList.toggle('dark');
+                document.documentElement.classList.toggle('light', !isDark);
+                const btn = document.getElementById('themeToggleBtn');
+                btn.innerHTML = isDark ? '<i class="fa-solid fa-moon text-lg"></i>' : '<i class="fa-solid fa-sun text-lg text-amber-500"></i>';
+                localStorage.setItem('mrdu_theme', isDark ? 'dark' : 'light');
+            },
+
+            loadTheme() {
+                const savedTheme = localStorage.getItem('mrdu_theme') || 'dark';
+                if (savedTheme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                    document.getElementById('themeToggleBtn').innerHTML = '<i class="fa-solid fa-sun text-lg text-amber-500"></i>';
+                }
+            },
+
+            toggleMobileMenu() {
+                const menu = document.getElementById('mobileMenu');
+                menu.classList.toggle('hidden');
+            },
+
+            // Main Neural Search
+            async handleMainSearch() {
+                const input = document.getElementById('mainSearchInput');
+                const display = document.getElementById('searchResultDisplay');
+                if (!input.value.trim()) return;
+
+                display.classList.remove('hidden');
+                display.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin text-cyan-400 mr-2"></i> Querying Campus Neural Index...`;
+
+                const res = await SimulatedServerAPI.search(input.value);
+                display.innerHTML = res.response;
+            },
+
+            setSearchQuery(q) {
+                document.getElementById('mainSearchInput').value = q;
+                this.handleMainSearch();
+            },
+
+            // Location Directory Engine
+            filterLocations(cat) {
+                document.querySelectorAll('.location-filter-btn').forEach(btn => {
+                    btn.className = 'location-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700';
+                });
+                event.target.className = 'location-filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-cyan-500 text-slate-950 shadow-md';
+                this.renderLocations(cat);
+            },
+
+            renderLocations(category) {
+                const grid = document.getElementById('campusDirectoryGrid');
+                const list = category === 'all' ? DB.locations : DB.locations.filter(l => l.category === category);
+
+                grid.innerHTML = list.map(item => `
+                    <div onclick="App.openLocationModal('${item.id}')" class="glass-panel p-6 rounded-3xl border border-slate-800 hover:border-cyan-500/50 cursor-pointer transition-all hover:-translate-y-1.5 flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid ${item.icon}"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white light:text-slate-900 group-hover:text-cyan-400 transition-colors">${item.name}</h3>
+                            <p class="text-xs text-slate-400 mt-2 line-clamp-2">${item.shortDesc}</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-xs text-cyan-400 font-semibold">
+                            <span>Inspect Sector</span>
+                            <i class="fa-solid fa-chevron-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            openLocationModal(id) {
+                const item = DB.locations.find(l => l.id === id);
+                if (!item) return;
+
+                const content = document.getElementById('locationModalContent');
+                content.innerHTML = `
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-3xl mb-4">
+                        <i class="fa-solid ${item.icon}"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-2">${item.name}</h3>
+                    <p class="text-xs text-slate-300 mb-4">${item.shortDesc}</p>
+
+                    <div class="space-y-3 bg-slate-950/80 p-4 rounded-2xl border border-slate-800 text-xs mb-6">
+                        <div class="flex items-center text-slate-300">
+                            <i class="fa-solid fa-layer-group text-cyan-400 w-6"></i>
+                            <span class="font-bold mr-2">Floor/Level:</span> ${item.floor}
+                        </div>
+                        <div class="flex items-center text-slate-300">
+                            <i class="fa-solid fa-clock text-cyan-400 w-6"></i>
+                            <span class="font-bold mr-2">Operating Hours:</span> ${item.hours}
+                        </div>
+                        <div class="flex items-center text-slate-300">
+                            <i class="fa-solid fa-phone text-cyan-400 w-6"></i>
+                            <span class="font-bold mr-2">Contact Desk:</span> ${item.contact}
+                        </div>
+                        <div class="flex items-start text-slate-300">
+                            <i class="fa-solid fa-diamond-turn-right text-cyan-400 w-6 mt-0.5"></i>
+                            <div><span class="font-bold">Directions:</span> ${item.directions}</div>
+                        </div>
+                    </div>
+
+                    <button onclick="App.closeLocationModal()" class="w-full bg-cyan-500 text-slate-950 font-bold py-3 rounded-xl text-xs">Close Sector Map</button>
+                `;
+
+                document.getElementById('locationModal').classList.remove('hidden');
+            },
+
+            closeLocationModal() {
+                document.getElementById('locationModal').classList.add('hidden');
+            },
+
+            // Events Hub Engine
+            filterEvents(cat) {
+                document.querySelectorAll('.event-filter-btn').forEach(btn => {
+                    btn.className = 'event-filter-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700';
+                });
+                event.target.className = 'event-filter-btn text-xs px-3 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold';
+                this.renderEvents(cat);
+            },
+
+            renderEvents(category) {
+                const grid = document.getElementById('eventsGrid');
+                const savedRsvps = JSON.parse(localStorage.getItem('mrdu_rsvps') || '{}');
+                const list = category === 'all' ? DB.events : DB.events.filter(e => e.category === category);
+
+                grid.innerHTML = list.map(e => {
+                    const isRsvpd = !!savedRsvps[e.id];
+                    return `
+                        <div class="glass-panel p-6 rounded-3xl border border-slate-800 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="text-[10px] font-bold uppercase px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">${e.category}</span>
+                                    <span class="text-xs text-slate-400"><i class="fa-solid fa-calendar mr-1"></i>${e.date}</span>
+                                </div>
+                                <h3 class="text-lg font-bold text-white light:text-slate-900 mb-2">${e.title}</h3>
+                                <p class="text-xs text-slate-400 mb-4">${e.desc}</p>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400 mb-3"><i class="fa-solid fa-location-dot text-cyan-400 mr-1"></i>${e.location}</div>
+                                <button onclick="App.toggleRSVP('${e.id}')" class="w-full py-2.5 rounded-xl font-bold text-xs transition-all ${isRsvpd ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-slate-800 hover:bg-slate-700 text-slate-200'}">
+                                    ${isRsvpd ? '✓ RSVP Confirmed' : 'Confirm RSVP'}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            },
+
+            toggleRSVP(id) {
+                const savedRsvps = JSON.parse(localStorage.getItem('mrdu_rsvps') || '{}');
+                savedRsvps[id] = !savedRsvps[id];
+                localStorage.setItem('mrdu_rsvps', JSON.stringify(savedRsvps));
+                this.renderEvents('all');
+            },
+
+            // Study Summarizer
+            async summarizeStudyText() {
+                const input = document.getElementById('studyNoteInput');
+                const result = document.getElementById('studySummarizerResult');
+                if (!input.value.trim()) return;
+
+                result.classList.remove('hidden');
+                result.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin text-cyan-400 mr-2"></i> Analyzing text and extracting concepts...`;
+
+                const res = await SimulatedServerAPI.summarize(input.value);
+                result.innerHTML = res.summary;
+            },
+
+            // Pod Booking
+            async handleRoomBooking(e) {
+                e.preventDefault();
+                const room = document.getElementById('bookingRoomSelect').value;
+                const date = document.getElementById('bookingDate').value;
+                const time = document.getElementById('bookingTime').value;
+
+                await SimulatedServerAPI.bookPod({ room, date, time, id: Date.now() });
+                this.loadBookings();
+                alert('Pod Reservation Confirmed successfully!');
+            },
+
+            loadBookings() {
+                const list = document.getElementById('activeBookingsList');
+                const bookings = JSON.parse(localStorage.getItem('mrdu_bookings') || '[]');
+
+                if (bookings.length === 0) {
+                    list.innerHTML = `<span class="text-slate-500 italic">No active reservations found.</span>`;
+                    return;
+                }
+
+                list.innerHTML = bookings.map(b => `
+                    <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-cyan-300">${b.room}</div>
+                            <div class="text-[10px] text-slate-400">${b.date} • ${b.time}</div>
+                        </div>
+                        <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400">Confirmed</span>
+                    </div>
+                `).join('');
+            },
+
+            // Emergency Distress Signal
+            triggerSOS() {
+                const out = document.getElementById('sosStatusOutput');
+                out.classList.remove('hidden');
+                out.innerHTML = `
+                    <div class="flex items-center space-x-2 text-red-400 font-bold mb-2">
+                        <i class="fa-solid fa-satellite-dish animate-spin"></i>
+                        <span>EMERGENCY SOS BROADCASTING...</span>
+                    </div>
+                    <p class="text-xs">GPS Coordinates locked: 17.3850° N, 78.4867° E (Campus Quadrangle)</p>
+                    <p class="text-xs text-slate-400 mt-1">Direct alert dispatched to Campus Security Control Room and Health Desk. Nearby wardens notified.</p>
+                `;
+            },
+
+            // Floating Chatbot UI Logic
+            toggleChatbot(show) {
+                const modal = document.getElementById('chatbotModal');
+                const btn = document.getElementById('chatbotTriggerBtn');
+                if (show) {
+                    modal.classList.remove('hidden');
+                    btn.classList.add('hidden');
+                } else {
+                    modal.classList.add('hidden');
+                    btn.classList.remove('hidden');
+                }
+            },
+
+            sendQuickPrompt(text) {
+                document.getElementById('chatInput').value = text;
+                this.handleChatSubmit(new Event('submit'));
+            },
+
+            async handleChatSubmit(e) {
+                e.preventDefault();
+                const input = document.getElementById('chatInput');
+                const text = input.value.trim();
+                if (!text) return;
+
+                this.appendChatMessage('user', text);
+                input.value = '';
+
+                // Typing indicator
+                const typingId = this.appendTypingIndicator();
+
+                const res = await SimulatedServerAPI.chat(text);
+
+                this.removeTypingIndicator(typingId);
+                this.appendChatMessage('bot', res.reply);
+            },
+
+            appendChatMessage(type, text) {
+                const body = document.getElementById('chatBody');
+                const msg = document.createElement('div');
+                msg.className = `flex items-start space-x-2 ${type === 'user' ? 'justify-end' : ''}`;
+
+                if (type === 'user') {
+                    msg.innerHTML = `
+                        <div class="bg-cyan-500 text-slate-950 p-3 rounded-2xl rounded-tr-none font-medium max-w-[85%]">
+                            ${text}
+                        </div>
+                    `;
+                } else {
+                    msg.innerHTML = `
+                        <div class="w
